@@ -22,7 +22,23 @@ coro::task<int> coro_int() {
 TEST(coro_int, 1) {
   INFO("start ")
   auto ret = coro_int();
+  INFO("before resume ")
   ret.resume();
+  sleep(1);
+  INFO("coro return " << ret.handle().promise().result())
+}
+coro::task<int> wait_int() {
+  INFO("wait_int ")
+  co_await coro_int();
+  INFO("wait_int end")
+  co_return 43;
+}
+TEST(wait_int, 1) {
+  INFO("start ")
+  auto ret = wait_int();
+  INFO("before resume ")
+  ret.resume();
+  sleep(1);
   INFO("coro return " << ret.handle().promise().result())
 }
 int main(int argc, char **argv) {
