@@ -1,0 +1,10 @@
+include(default)
+
+[settings]
+compiler=gcc
+compiler.version=10
+compiler.libcxx=libstdc++11
+
+[env]
+CC=/usr/bin/gcc-10
+CXX=/usr/bin/g++-10
