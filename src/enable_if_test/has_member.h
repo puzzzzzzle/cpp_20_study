@@ -87,17 +87,17 @@ public:                                                                  \
 #define CALL_IF_EXISTS_FUNC_VOID(prefix, name, ret)                         \
   template <typename T>                                                     \
   typename std::enable_if<_HasMember_##name##prefix<T>::value, ret>::type   \
-      CALL_##name##prefix(T &para) {                                 \
+      CALL_##name##prefix(T &para) {                                        \
     return para.name();                                                     \
   }                                                                         \
   template <typename T>                                                     \
   typename std::enable_if<!_HasMember_##name##prefix<T>::value, ret>::type  \
-      CALL_##name##prefix(T &para) {                                 \
+      CALL_##name##prefix(T &para) {                                        \
     return {};                                                              \
   }                                                                         \
   template <typename T>                                                     \
   typename std::enable_if<_HasMember_##name##prefix<T>::value, void>::type  \
-      CALL_##name##prefix##_no_return(T &para) {                       \
+      CALL_##name##prefix##_no_return(T &para) {                            \
     para.name();                                                            \
   }                                                                         \
   template <typename T>                                                     \
@@ -114,4 +114,3 @@ public:                                                                  \
 #define HAS_MEMBER_CALL(prefix, name, ret, args...) \
   HAS_MEMBER_FUNC(prefix, name, args)               \
   CALL_IF_EXISTS_FUNC(prefix, name, ret, args)
-
